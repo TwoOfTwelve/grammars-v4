@@ -480,17 +480,16 @@ enumerators0
     ;
 
 enumerators
-    : generator (end_of_stat enumerator)*
+    : generator (end_of_stat generator)*
     ;
 
-enumerator
-    : generator
-    | guard_+
-    | pattern1 ASSIGN expr
+generatorExtension
+    : end_of_stat? guard_+
+    | end_of_stat pattern1 ASSIGN expr
     ;
 
 generator
-    : CASE? pattern1 LARROW expr
+    : CASE? pattern1 LARROW expr generatorExtension+
     ;
 
 guard_
